@@ -20,6 +20,7 @@ waybar
 xdg-desktop-portal-gtk
 
 [yay]
+ashell
 brave-bin
 iwdgui # network manager gui
 iwgtk # network manager gui, somehow iwdgui is not working, also this looks better
