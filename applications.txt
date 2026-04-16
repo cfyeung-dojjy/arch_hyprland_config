@@ -22,6 +22,7 @@ xdg-desktop-portal-gtk
 [yay]
 ashell
 brave-bin
+hyprland-preview-share-picker-git
 iwdgui # network manager gui
 iwgtk # network manager gui, somehow iwdgui is not working, also this looks better
 miniconda3
