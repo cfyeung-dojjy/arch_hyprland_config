@@ -18,6 +18,7 @@ ttf-space-mono-nerd
 udiskie
 waybar
 xdg-desktop-portal-gtk
+zed # code editor written in rust
 
 [yay]
 ashell
