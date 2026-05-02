@@ -6,12 +6,13 @@ position = "Top"
 [modules]
 left = [ ["Workspaces", "Tray"] ]
 center = [ "Tempo" ]
-right = [ "MediaPlayer", "SystemInfo", [ "Privacy", "Settings" ] ]
+right = [ "SystemInfo", [ "Privacy", "Settings" ] ]
 
 [workspaces]
 visibility_mode = "MonitorSpecific"
 group_by_monitor = false
 enable_workspace_filling = false
+enable_virtual_desktops = true
 
 [tempo]
 clock_format = "%b %d %R"
