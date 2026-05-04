@@ -1,3 +1,6 @@
 [submodule "config/waybar"]
 	path = config/waybar
 	url = https://github.com/JohnYeung-dojjy/waybar.git
+[submodule "config/quickshell"]
+	path = config/quickshell
+	url = https://github.com/cfyeung-dojjy/quickshell.git
