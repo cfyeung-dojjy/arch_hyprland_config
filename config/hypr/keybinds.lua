@@ -1,7 +1,5 @@
 require("programs")
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
-
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
@@ -26,33 +24,11 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
---! NOTE: 2 monitors setup, update me when we need more monitors or hot plug`
-
-function focus_on_virtual_desktop(i)
-    local window_workspace = hl.get_active_workspace().id
-    local is_on_main_monitor = window_workspace <= 10
-    hl.dispatch(hl.dsp.focus({ workspace = i }))
-    hl.dispatch(hl.dsp.focus({ workspace = i + 10 }))
-end
-
-
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    -- hl.bind(mainMod .. " + " .. key, focus_on_virtual_desktop)
-    hl.bind(mainMod .. " + " .. key, function()
-        local window_workspace = hl.get_active_workspace().id
-        local is_on_main_monitor = window_workspace <= 10
-        hl.dispatch(hl.dsp.focus({ workspace = i }))
-        hl.dispatch(hl.dsp.focus({ workspace = i + 10 }))
-    end)
-    hl.bind(mainMod .. " + SHIFT + " .. key, function()
-        local window_workspace = hl.get_active_workspace().id
-        local is_on_main_monitor = window_workspace <= 10
-        hl.dispatch(hl.dsp.window.move({ workspace = is_on_main_monitor and key or key + 10 }))
-        focus_on_virtual_desktop(i)
-    end)
+    local key = i % 10
+    hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
-
 
 hl.bind(mainMod .. " + SHIFT + comma", hl.dsp.layout("colresize -0.1"))
 hl.bind(mainMod .. " + SHIFT + period", hl.dsp.layout("colresize +0.1"))

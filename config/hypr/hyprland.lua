@@ -53,3 +53,14 @@ hl.config({
         middle_click_paste      = false  -- Set to true to enable pasting selected text with middle click
     },
 })
+
+
+local ok, module = pcall(require, "virtual_desktops")
+if not ok then
+    hl.notification.create(
+        {
+            text = "virtual desktop module failed to load",
+            timeout = 10000,
+            icon = "error",
+        })
+end
