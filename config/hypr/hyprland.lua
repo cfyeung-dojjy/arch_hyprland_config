@@ -55,7 +55,7 @@ hl.config({
 })
 
 
-local ok, module = pcall(require, "virtual_desktops")
+local ok, module = pcall(require, "virtual_desktops.virtual_desktops")
 if not ok then
     hl.notification.create(
         {
