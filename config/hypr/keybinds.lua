@@ -12,22 +12,36 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=sway flameshot gui"))
+hl.bind(mainMod .. " + SHIFT + S", function()
+    -- local active_monitor = hl.get_active_monitor()
+    local cursor_pos = hl.get_cursor_pos()
+    hl.dispatch(hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=sway flameshot gui"))
+    -- focus cursor to original location
+    if cursor_pos ~= nil then
+        hl.dispatch(hl.dsp.cursor.move({ x = cursor_pos.x, y = cursor_pos.y }))
+    end
+end)
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+for i, direction in ipairs({ "left", "right", "up", "down" }) do
+    hl.bind(mainMod .. " + " .. direction, function()
+        local cursor_pos = hl.get_cursor_pos()
+        hl.dispatch(hl.dsp.focus({ direction = direction }))
+        -- focus cursor to original location
+        if cursor_pos ~= nil then
+            hl.dispatch(hl.dsp.cursor.move({ x = cursor_pos.x, y = cursor_pos.y }))
+        end
+    end)
+end
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10
     hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 hl.bind(mainMod .. " + SHIFT + comma", hl.dsp.layout("colresize -0.1"))
