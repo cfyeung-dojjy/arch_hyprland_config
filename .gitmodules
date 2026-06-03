@@ -6,4 +6,4 @@
 	url = https://github.com/cfyeung-dojjy/quickshell.git
 [submodule "config/hypr/virtual_desktops"]
 	path = config/hypr/virtual_desktops
-	url = git@github.com:cfyeung-dojjy/hyprland_virtual_desktops_lua.git
+	url = https://github.com/cfyeung-dojjy/hyprland_virtual_desktops_lua.git
