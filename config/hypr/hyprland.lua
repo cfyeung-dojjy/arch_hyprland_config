@@ -31,6 +31,7 @@ require("windowrules")
 --
 hl.on("hyprland.start", function()
     -- hl.exec_cmd("hyprpm reload -n")
+    hl.exec_cmd("WGPU_POWER_PREF=high ashell")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("fcitx5")
     hl.exec_cmd("flameshot")
@@ -39,7 +40,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("gtk-launch discord")
     hl.exec_cmd("zeditor ~/arch_hyprland_config")
     hl.exec_cmd(terminal)
-    hl.exec_cmd("ashell")
 end)
 
 ----------------
