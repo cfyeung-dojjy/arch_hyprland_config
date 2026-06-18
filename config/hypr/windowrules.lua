@@ -12,10 +12,9 @@ local suppressMaximizeRule = hl.window_rule({
 })
 -- suppressMaximizeRule:set_enabled(false)
 local suppressFullscreenRule = hl.window_rule({
-    -- Ignore fullscreen requests from all apps. You'll probably like this.
-    name           = "suppress-fullscreen-events",
-    match          = { class = ".*" },
-
+    -- Ignore fullscreen requests from steam games.
+    name           = "suppress-steam-fullscreen-events",
+    match          = { class = "steam_app.*" },
     suppress_event = "fullscreen",
 })
 
@@ -51,24 +50,25 @@ hl.window_rule({
     float = true,
 })
 
--- https://wiki.hypr.land/FAQ/#how-do-i-screenshot
-hl.window_rule {
-    name = "flameshot-tweaks",
-    match = {
-        class = "flameshot",
-        title = "flameshot",
-    },
-    rounding = 0,
-    border_size = 0,
-    fullscreen_state = 0,
-    float = true,
-    monitor = "DP-3",
-    move = "0 0",
-    size = "(monitor_w*2) (monitor_h)",
-    pin = true,
-    no_initial_focus = true,
-    no_anim = true
-}
+-- https://github.com/flameshot-org/flameshot/blob/master/docs/UsageHyprlandSwayWlroots.md
+hl.window_rule({
+    match     = { class = "flameshot" },
+    no_anim   = true,
+    pin       = true,
+    float     = true,
+    decorate  = false,
+    no_blur   = true,
+    no_shadow = true,
+})
+
+hl.window_rule({
+    match = { class = "flameshot", title = "flameshot-pin" },
+    move  = { "cursor_x-(window_w*0.5)", "cursor_y-(window_h*0.5)" },
+})
+hl.window_rule({
+    match = { class = "flameshot", title = "flameshot" },
+    move  = { 0, 0 },
+})
 
 hl.window_rule {
     name = "float-file-manager",

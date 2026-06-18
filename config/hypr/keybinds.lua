@@ -13,13 +13,10 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
 hl.bind(mainMod .. " + SHIFT + S", function()
-    -- local active_monitor = hl.get_active_monitor()
-    local cursor_pos = hl.get_cursor_pos()
-    hl.dispatch(hl.dsp.exec_cmd("XDG_CURRENT_DESKTOP=sway flameshot gui"))
-    -- focus cursor to original location
-    if cursor_pos ~= nil then
-        hl.dispatch(hl.dsp.cursor.move({ x = cursor_pos.x, y = cursor_pos.y }))
-    end
+    -- https://github.com/flameshot-org/flameshot/blob/master/docs/UsageHyprlandSwayWlroots.md
+    local mon = hl.get_active_monitor()
+    local n = mon and mon.id or 0
+    hl.dispatch(hl.dsp.exec_cmd("flameshot screen --number " .. n .. " --edit"))
 end)
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
